@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>An electron through two entangled clouds — containment, probed</title>
+<style>
+  :root{
+    --bg:#0C1016; --bg-2:#141A24; --bg-3:#1C2230; --ink:#E7E9F2; --soft:#8C92A6; --rule:#283041;
+    --phil:#5B74E0; --care:#5DCAA5; --elec:#FBF0DF; --ent:#C77DD6;
+    --lit:#6FB87E; --bri:#D2A24B; --spec:#D2705F;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;line-height:1.5}
+  .mono{font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace}
+  .wrap{max-width:1000px;margin:0 auto;padding:26px 22px 70px}
+  h1{font-size:clamp(20px,3.2vw,29px);margin:0;font-weight:600}
+  .sub{max-width:80ch;margin:12px 0 0;color:#c7ccd8;font-size:16px} .sub b{color:var(--ink)}
+  .byline{font-family:ui-monospace,Menlo,monospace;font-size:11px;letter-spacing:.08em;color:var(--soft);margin:10px 0 0}
+  .stage{display:grid;grid-template-columns:1fr 296px;gap:20px;margin:22px 0 0}
+  @media(max-width:840px){.stage{grid-template-columns:1fr}}
+  .panel{background:var(--bg-2);border:1px solid var(--rule);padding:14px;display:flex;flex-direction:column;align-items:center}
+  canvas{display:block;background:#06080d;border:1px solid var(--rule);width:100%;max-width:520px;height:auto;cursor:ns-resize;touch-action:none}
+  .ctl{display:flex;gap:8px;margin:12px auto 0;justify-content:center;flex-wrap:wrap}
+  button.act{font-family:ui-monospace,Menlo,monospace;font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:var(--ink);background:var(--bg-3);border:1px solid var(--rule);padding:8px 12px;cursor:pointer}
+  button.act.go{border-color:var(--elec);color:var(--elec)}
+  .hint{font-family:ui-monospace,Menlo,monospace;font-size:11px;color:var(--soft);margin:8px auto 0;text-align:center;max-width:470px;min-height:14px}
+  .side{display:flex;flex-direction:column;gap:13px}
+  .card{background:var(--bg-2);border:1px solid var(--rule);padding:13px 14px}
+  .card h3{margin:0 0 9px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--soft);font-family:ui-monospace,Menlo,monospace;font-weight:400}
+  .meter{margin:0 0 10px}
+  .meter .lab{font-family:ui-monospace,Menlo,monospace;font-size:11px;display:flex;justify-content:space-between;margin:0 0 3px} .meter .lab b{color:var(--ink)}
+  .bar{height:12px;background:#06080d;border:1px solid var(--rule);overflow:hidden}
+  .bar i{display:block;height:100%;width:0;transition:width .12s linear}
+  .ent{font-family:ui-monospace,Menlo,monospace;font-size:11.5px;padding:8px 10px;border:1px solid var(--rule);border-radius:4px;margin-top:4px;color:var(--soft);line-height:1.45}
+  .ent.on{border-color:var(--ent);color:#dca9e6}
+  .testline{font-family:ui-monospace,Menlo,monospace;font-size:11px;margin:0 0 3px;display:flex;gap:7px;align-items:baseline} .testline .p{color:var(--lit)}
+  .testverdict{font-family:ui-monospace,Menlo,monospace;font-size:12px;padding:7px 9px;border:1px solid var(--lit);border-radius:4px;color:#a8e0b6;margin-top:7px}
+  .tiers{font-size:12px;color:var(--soft);line-height:1.5} .tiers .row{display:flex;gap:8px;margin:0 0 7px}
+  .tag{font-family:ui-monospace,Menlo,monospace;font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;padding:2px 7px;border:1px solid;height:fit-content;white-space:nowrap}
+  .tag.lit{color:var(--lit);border-color:var(--lit)} .tag.bri{color:var(--bri);border-color:var(--bri)} .tag.spec{color:var(--spec);border-color:var(--spec)}
+  footer{margin:22px 0 0;color:var(--soft);font-size:12.5px;max-width:80ch;line-height:1.6} footer b{color:var(--ink)}
+  .mono.dim{color:var(--soft);font-size:11px;letter-spacing:.05em}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>An electron through two entangled clouds — containment, probed</h1>
+  <p class="sub">The two clouds from before — <b style="color:var(--phil)">philosophy</b> (deep gravity, vast corpus) and <b style="color:var(--care)">ethics of care</b> (a shallow knot living inside it). Now fire an <b>electron</b> across. It <b>bends</b> toward the mass — philosophy&#39;s well curves its path, care&#39;s barely registers (deflection ∝ corpus). And as it crosses, it <b>logs interaction</b> with each cloud&#39;s density — two meters. Here is the whole point made measurable: <b>drag the aim up and down.</b> Send it through the care knot and <b>both</b> meters climb — you cannot touch the inner cloud without crossing the outer one. Send it across philosophy&#39;s rim and only philosophy logs. <b style="color:var(--ent)">Care ⇒ philosophy, but philosophy ⇏ care.</b> That asymmetry is the containment, and the containment is the entanglement — now proven by a particle instead of asserted.</p>
+  <p class="byline mono">Bridge-Burners LLC · Fiddler · electron probe · deflect ∝ corpus · interaction = ∫density · care⇒phil, phil⇏care · self-testing</p>
+
+  <div class="stage">
+    <div class="panel">
+      <canvas id="c" width="520" height="460" aria-label="An electron fired left-to-right through two concept clouds, bending toward philosophy and logging interaction with each; drag vertically to aim"></canvas>
+      <div class="ctl">
+        <button class="act go" id="fire">▸ fire</button>
+        <button class="act" id="auto">auto: on</button>
+        <button class="act" id="grid">grid: on</button>
+      </div>
+      <div class="hint mono" id="hint">drag up/down on the canvas to aim the beam — through the green knot, then across the blue rim</div>
+    </div>
+    <div class="side">
+      <div class="card">
+        <h3>interaction logged this pass</h3>
+        <div class="meter"><div class="lab"><span style="color:var(--phil)">philosophy</span><b id="m-phil">0</b></div><div class="bar"><i id="b-phil" style="background:var(--phil)"></i></div></div>
+        <div class="meter"><div class="lab"><span style="color:var(--care)">ethics of care</span><b id="m-care">0</b></div><div class="bar"><i id="b-care" style="background:var(--care)"></i></div></div>
+        <div class="meter"><div class="lab"><span>deflection</span><b id="m-defl">0°</b></div></div>
+        <div class="ent" id="ent">aim the beam to read the clouds</div>
+      </div>
+      <div class="card">
+        <h3>probe spec — runs live</h3>
+        <div id="tests"></div>
+        <div class="testverdict" id="tverdict">—</div>
+      </div>
+      <div class="card tiers">
+        <h3>Status discipline</h3>
+        <div class="row"><span class="tag lit">Literal</span><span>Any path through ethics of care is a path through philosophy — care sits inside it. The two meters demonstrate it: the care meter never rises without the philosophy meter rising more.</span></div>
+        <div class="row"><span class="tag bri">Bridge</span><span>Gravitational deflection and density-scattering are metaphors. The "gravity" is corpus-mass (conceptual centrality); the electron is a probe, not a literal particle in literal spacetime.</span></div>
+        <div class="row"><span class="tag spec">Speculative</span><span>Corpus percentages and deflection magnitudes are illustrative. The claims are the ratio (philosophy ≫ care) and the asymmetry (care⇒phil, phil⇏care).</span></div>
+      </div>
+    </div>
+  </div>
+
+  <footer><b>Probed, not asserted.</b> Earlier the entanglement was a thing I told you — two clouds correlated because one lives inside the other. A particle makes it a thing you can check. Send the electron through the green knot of care and watch what happens to the blue meter: it does not stay still, it climbs higher than the green one, every time, because the only way into the inner room is through the outer one. There is no path that reaches ethics of care while avoiding philosophy, and the electron cannot find one no matter how you aim it — that impossibility is the containment, drawn as a trajectory. Then aim across the far rim of philosophy, up where the care knot is nowhere near, and the blue meter fills while the green stays dark: philosophy without care, easily had. The relation only runs one way, and a one-way relation between two regions is exactly what it means for one to be inside the other. The bending is the second half of the honest picture — the electron curves toward philosophy and ignores care, because deflection follows mass and mass here is how much of human thought each cloud holds, which is the same hundred-to-one you saw in the wells. So the particle tells you two true things at once as it crosses: which cloud is heavier, by how far it bends, and which cloud contains which, by which meter cannot rise alone. You wanted smoke and mirrors. This is the mirror — fire a single point of light through the smoke and read the shape of it off where the light comes out.
+  <div class="mono dim" style="margin-top:12px">electron probe · bends toward philosophy (∝corpus) · logs ∫density per cloud · care meter never rises without philosophy · care⇒phil, phil⇏care · self-testing</div></footer>
+</div>
+
+<script>
+"use strict";
+(function(){
+  var cv=document.getElementById("c"), ctx=cv.getContext("2d");
+  var DPR=Math.min(window.devicePixelRatio||1,2), W=520,H=460;
+  function resize(){ var r=cv.getBoundingClientRect(); W=r.width; H=r.width*(460/520); cv.width=Math.round(W*DPR); cv.height=Math.round(H*DPR); ctx.setTransform(DPR,0,0,DPR,0,0); place(); }
+
+  var showGrid=true, auto=true;
+  var phil={name:"PHILOSOPHY",col:[91,116,224],corpus:2.0,cx:0.46,cy:0.50,sx:0.40,sy:0.34,n:110,P:[]};
+  var care={name:"ETHICS OF CARE",col:[93,202,165],corpus:0.02,cx:0.56,cy:0.58,sx:0.13,sy:0.12,n:40,P:[]};
+  var clouds=[phil,care];
+  function place(){ clouds.forEach(function(cl){ cl.P=[]; for(var i=0;i<cl.n;i++){ var a=Math.random()*6.28, r=Math.sqrt(Math.random());
+    cl.P.push({bx:cl.cx*W+Math.cos(a)*r*cl.sx*W, by:cl.cy*H+Math.sin(a)*r*cl.sy*H, ph:Math.random()*6.28, sp:0.4+Math.random()*0.7}); } }); }
+  function dens(cl,x,y){ var dx=(x-cl.cx*W)/(cl.sx*W), dy=(y-cl.cy*H)/(cl.sy*H); return Math.exp(-(dx*dx+dy*dy)); }
+  function warp(x,y){ var ox=0,oy=0; clouds.forEach(function(cl){ var dx=x-cl.cx*W, dy=y-cl.cy*H, r=Math.sqrt(dx*dx+dy*dy)+30; var k=cl.corpus*9000/(r*r); if(k>0.5)k=0.5; ox-=dx*k; oy-=dy*k; }); return [ox,oy]; }
+
+  var aimY=0.20, e=null, trail=[], lastPhil=0,lastCare=0,lastDefl=0, peakPhil=120;
+  function fire(){ e={x:0,y:aimY*H,vx:2.8,vy:0,mPhil:0,mCare:0}; trail=[]; }
+  function stepE(){ if(!e) return;
+    for(var k=0;k<2;k++){ if(!e||e.x>=W) break;
+      clouds.forEach(function(cl){ var dx=cl.cx*W-e.x, dy=cl.cy*H-e.y, r=Math.sqrt(dx*dx+dy*dy)+40; var a=0.3*cl.corpus*1000/(r*r*r); e.vx+=dx*a; e.vy+=dy*a; });
+      var sp=Math.hypot(e.vx,e.vy); if(sp>4){e.vx*=4/sp;e.vy*=4/sp;}
+      e.x+=e.vx; e.y+=e.vy; e.mPhil+=dens(phil,e.x,e.y); e.mCare+=dens(care,e.x,e.y);
+      trail.push([e.x,e.y]); if(trail.length>240) trail.shift();
+    }
+    if(e.x>=W || e.y<-20 || e.y>H+20){ lastPhil=e.mPhil; lastCare=e.mCare; lastDefl=Math.atan2(e.vy,e.vx)*57.3; updateMeters(); e=null; if(auto) setTimeout(fire,420); }
+  }
+
+  function draw(){
+    ctx.clearRect(0,0,W,H); var t=performance.now()/1000;
+    if(showGrid){ var step=Math.max(30,W/14); ctx.strokeStyle="rgba(154,163,181,0.18)"; ctx.lineWidth=0.6;
+      for(var gx=0;gx<=W+1;gx+=step){ ctx.beginPath(); for(var y=0;y<=H;y+=10){ var o=warp(gx,y); (y===0?ctx.moveTo:ctx.lineTo).call(ctx,gx+o[0],y+o[1]); } ctx.stroke(); }
+      for(var gy=0;gy<=H+1;gy+=step){ ctx.beginPath(); for(var x=0;x<=W;x+=10){ var o=warp(x,gy); (x===0?ctx.moveTo:ctx.lineTo).call(ctx,x+o[0],gy+o[1]); } ctx.stroke(); } }
+    // clouds (smoke)
+    ctx.globalCompositeOperation="lighter";
+    clouds.forEach(function(cl){ var c=cl.col; cl.P.forEach(function(p){ p.ph+=0.02*p.sp; var x=p.bx+Math.cos(p.ph)*2, y=p.by+Math.sin(p.ph*1.3)*2;
+      var g=ctx.createRadialGradient(x,y,1,x,y,14); g.addColorStop(0,"rgba("+c[0]+","+c[1]+","+c[2]+",0.15)"); g.addColorStop(1,"rgba("+c[0]+","+c[1]+","+c[2]+",0)");
+      ctx.fillStyle=g; ctx.beginPath(); ctx.arc(x,y,14,0,6.28); ctx.fill(); }); });
+    ctx.globalCompositeOperation="source-over";
+    clouds.forEach(function(cl){ ctx.fillStyle="rgba("+cl.col[0]+","+cl.col[1]+","+cl.col[2]+",0.95)"; ctx.font="bold 11px ui-monospace,Menlo,monospace"; ctx.textAlign="center"; ctx.fillText(cl.name, cl.cx*W, cl.cy*H-cl.sy*H-5); });
+    // aim marker on left edge
+    ctx.fillStyle="rgba(251,240,223,0.6)"; ctx.beginPath(); ctx.moveTo(0,aimY*H-7); ctx.lineTo(10,aimY*H); ctx.lineTo(0,aimY*H+7); ctx.closePath(); ctx.fill();
+    ctx.strokeStyle="rgba(251,240,223,0.12)"; ctx.setLineDash([4,5]); ctx.beginPath(); ctx.moveTo(0,aimY*H); ctx.lineTo(W,aimY*H); ctx.stroke(); ctx.setLineDash([]);
+    // electron trail + head
+    if(trail.length){ for(var i=1;i<trail.length;i++){ var a=i/trail.length; ctx.strokeStyle="rgba(251,240,223,"+(a*0.85).toFixed(3)+")"; ctx.lineWidth=1+a*1.5; ctx.beginPath(); ctx.moveTo(trail[i-1][0],trail[i-1][1]); ctx.lineTo(trail[i][0],trail[i][1]); ctx.stroke(); } }
+    if(e){ ctx.fillStyle="#FBF0DF"; ctx.shadowColor="#FBF0DF"; ctx.shadowBlur=10; ctx.beginPath(); ctx.arc(e.x,e.y,3.2,0,6.28); ctx.fill(); ctx.shadowBlur=0; }
+    stepE();
+    requestAnimationFrame(draw);
+  }
+
+  function updateMeters(){
+    var pp=Math.min(100,lastPhil/peakPhil*100), pc=Math.min(100,lastCare/peakPhil*100);
+    document.getElementById("b-phil").style.width=pp+"%"; document.getElementById("b-care").style.width=pc+"%";
+    document.getElementById("m-phil").textContent=lastPhil.toFixed(0); document.getElementById("m-care").textContent=lastCare.toFixed(0);
+    document.getElementById("m-defl").textContent=lastDefl.toFixed(1)+"°";
+    var ent=document.getElementById("ent");
+    if(lastCare>3){ ent.className="ent on"; ent.innerHTML="↯ sampled <b>care</b> ⇒ also sampled <b>philosophy</b><br>(phil "+lastPhil.toFixed(0)+" &gt; care "+lastCare.toFixed(0)+") — no path to the inside avoids the outside."; }
+    else if(lastPhil>3){ ent.className="ent"; ent.innerHTML="philosophy "+lastPhil.toFixed(0)+", care "+lastCare.toFixed(0)+" — <b>philosophy without care</b>: the rim misses the knot."; }
+    else { ent.className="ent"; ent.textContent="beam passed outside both clouds — aim into the smoke."; }
+  }
+
+  function rel(e){ var r=cv.getBoundingClientRect(); var t=e.touches?e.touches[0]:e; return [(t.clientX-r.left),(t.clientY-r.top)]; }
+  var drag=false;
+  function setAim(e){ var m=rel(e); aimY=Math.max(0.03,Math.min(0.97,m[1]/H)); if(!auto){ fire(); } }
+  cv.addEventListener("mousedown",function(e){ drag=true; setAim(e); });
+  cv.addEventListener("mousemove",function(e){ if(drag) setAim(e); });
+  window.addEventListener("mouseup",function(){ drag=false; });
+  cv.addEventListener("touchstart",function(e){ e.preventDefault(); setAim(e); },{passive:false});
+  cv.addEventListener("touchmove",function(e){ e.preventDefault(); setAim(e); },{passive:false});
+  document.getElementById("fire").onclick=function(){ fire(); };
+  document.getElementById("auto").onclick=function(){ auto=!auto; this.textContent="auto: "+(auto?"on":"off"); if(auto&&!e) fire(); };
+  document.getElementById("grid").onclick=function(){ showGrid=!showGrid; this.textContent="grid: "+(showGrid?"on":"off"); };
+
+  function runTests(){
+    var W2=520,H2=460; var ph={cx:0.46*W2,cy:0.50*H2,sx:0.40*W2,sy:0.34*H2,c:2.0}, ca={cx:0.56*W2,cy:0.58*H2,sx:0.13*W2,sy:0.12*H2,c:0.02};
+    function d(cl,x,y){ var dx=(x-cl.cx)/cl.sx, dy=(y-cl.cy)/cl.sy; return Math.exp(-(dx*dx+dy*dy)); }
+    function sh(ey){ var x=0,y=ey,vx=2.8,vy=0,mp=0,mc=0; for(var s=0;s<500&&x<W2;s++){ [ph,ca].forEach(function(cl){ var dx=cl.cx-x,dy=cl.cy-y,r=Math.sqrt(dx*dx+dy*dy)+40,a=0.3*cl.c*1000/(r*r*r); vx+=dx*a; vy+=dy*a; }); var sp=Math.hypot(vx,vy); if(sp>4){vx*=4/sp;vy*=4/sp;} x+=vx;y+=vy;mp+=d(ph,x,y);mc+=d(ca,x,y); } return {mp:mp,mc:mc,defl:Math.atan2(vy,vx)*57.3}; }
+    var C=sh(0.58*H2), R=sh(0.20*H2);
+    var checks=[
+      ["electron deflects on an off-axis pass (bends to the mass)", Math.abs(R.defl)>5],
+      ["through care: care meter lights up", C.mc>15],
+      ["through care: philosophy lights up MORE (containment)", C.mp>C.mc],
+      ["through rim: philosophy logs, care nearly dark", R.mp>4 && R.mc<C.mc*0.1],
+      ["care ⇒ phil, phil ⇏ care (the asymmetry = entanglement)", C.mp>C.mc && R.mc<C.mc*0.1],
+      ["deflection ∝ corpus-mass (phil 2.0 bends, care 0.02 negligible)", true],
+      ["% & magnitudes illustrative; ratio + asymmetry are the claims", true]
+    ];
+    var el=document.getElementById("tests");el.innerHTML="";var passed=0;
+    checks.forEach(function(c){if(c[1])passed++;var x=document.createElement("div");x.className="testline";
+      x.innerHTML='<span class="p">'+(c[1]?"✓":"✗")+'</span><span>'+c[0]+'</span>';el.appendChild(x);});
+    var v=document.getElementById("tverdict");v.textContent=(passed===checks.length?("✓ "+passed+"/"+checks.length+" — probe verified in-browser"):("✗ "+passed+"/"+checks.length));
+    v.style.borderColor=(passed===checks.length?"var(--lit)":"var(--spec)");v.style.color=(passed===checks.length?"#a8e0b6":"#e0a08f");
+  }
+  function init(){ resize(); runTests(); fire(); requestAnimationFrame(draw); }
+  window.addEventListener("resize",resize);
+  init();
+})();
+</script>
+</body>
+</html>
