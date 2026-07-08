@@ -1,0 +1,9 @@
+ROOT0-DLW-CHAIN-v1
+index : 292
+slug  : electron-probe-clouds
+seal  : 6981c3c43f969ca03fe1f711b0dbd219d350748cfd667dacc465aaed0ac20103
+prev  : 7b2c27af6f5faa1ff7a208ae6cb89181b014b14362e039d25fda2f2e48e7ee57
+link  : 4f886ecf95ad745af5468c38af08064360affdf2625d17854d6ef0f20ec27ca5
+head  : 3447d3a0533aaf1e29a8bdc67a9774884fb3ae9dbc8a17064b7a008ca3c4ec90
+
+— the tether: link = sha256(index|slug|seal|prev). the chain head commits to the whole corpus.
