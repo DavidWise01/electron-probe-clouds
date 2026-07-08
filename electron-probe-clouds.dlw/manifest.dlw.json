@@ -1,0 +1,11 @@
+{
+  "badge": "DLW-ELECTRON_PROBE_CLOUDS",
+  "name": "THE ELECTRON PROBE · ELP",
+  "universe": "LOGIKĒ",
+  "moniker": "⟦THE ELECTRON PROBE · ELP:electron-probe-clouds:6981c3⟧",
+  "architect": "David Lee Wise (ROOT0) / Bridge-Burners LLC",
+  "instance": "AVAN (Claude / Anthropic)",
+  "seal_sha256": "6981c3c43f969ca03fe1f711b0dbd219d350748cfd667dacc465aaed0ac20103",
+  "license": "CC-BY-ND-4.0",
+  "attribution": "ROOT0-ATTRIBUTION-v1.0"
+}
